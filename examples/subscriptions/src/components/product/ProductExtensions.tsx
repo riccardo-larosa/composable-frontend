@@ -68,6 +68,11 @@ function Extension({
     ) : null;
   }
 
+  // Special handling for question-1, question-2, question-3
+  if (extKey.toLowerCase() === 'question-1' || extKey.toLowerCase() === 'question-2' || extKey.toLowerCase() === 'question-3') {
+    return <></>;
+  }
+
   // Default rendering for other extensions
   return (
     <>

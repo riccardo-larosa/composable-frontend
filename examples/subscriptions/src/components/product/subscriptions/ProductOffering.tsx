@@ -2,26 +2,8 @@
 import { StatusButton } from "../../button/StatusButton";
 import Price from "../Price";
 import { useCartAddSubscription } from "../../../hooks/useCartAddSubscription";
+import { SubscriptionPlan } from "@elasticpath/js-sdk";
 
-interface Plan {
-  id: string;
-  attributes: {
-    name: string;
-    description?: string;
-    interval: string;
-    interval_count: number;
-    
-  },
-  meta?: {
-    display_price: {
-      without_tax: {
-        currency: string;
-        amount: number;
-        formatted: string;
-      };
-    };
-  };
-}
 
 interface Offering {
   id: string;
@@ -33,7 +15,7 @@ interface Offering {
 
 interface ProductOfferingProps {
   offerings: Offering[];
-  plans: Plan[];
+  plans: SubscriptionPlan[];
 }
 
 export function ProductOffering({ offerings, plans }: ProductOfferingProps): JSX.Element | null {
@@ -42,6 +24,7 @@ export function ProductOffering({ offerings, plans }: ProductOfferingProps): JSX
   if (!offerings?.length) {
     return null;
   }
+  console.log(`plans: ${JSON.stringify(plans[0], null, 2)}`);
 
   return (
     <div className="flex flex-col gap-6 md:gap-10">
@@ -61,12 +44,12 @@ export function ProductOffering({ offerings, plans }: ProductOfferingProps): JSX
                   <div key={plan.id} className="border rounded p-4 hover:border-primary">
                     <h4 className="font-medium">{plan.attributes.name}</h4>
                     <p className="text-gray-600 text-sm mb-2">
-                      {plan.attributes.interval_count} {plan.attributes.interval}
+                      {plan.attributes.billing_frequency} {plan.attributes.billing_interval_type}
                     </p>
                     <p className="text-lg font-semibold">
                       <Price 
-                        price={plan.meta?.display_price.without_tax.formatted}
-                        currency={plan.meta?.display_price.without_tax.currency}
+                        price={plan.meta?.display_price.without_tax.formatted || ''}
+                        currency={plan.meta?.display_price.without_tax.currency || ''}
                         size="text-lg"
                       />
                     </p>

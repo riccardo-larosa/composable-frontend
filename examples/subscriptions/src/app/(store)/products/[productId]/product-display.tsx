@@ -7,6 +7,8 @@ import { ProductContext } from "../../../../lib/product-context";
 import SimpleProductDetail from "../../../../components/product/SimpleProduct";
 import { SubscriptionOffering, SubscriptionPlan } from "@elasticpath/js-sdk";
 import { ProductOffering } from "../../../../components/product/subscriptions/ProductOffering";
+import { SmartQuestionsBot } from "../../../../components/product/smart-bot/SmartQuestionsBot";
+import { Extensions } from "@elasticpath/js-sdk";
 export function ProductProvider({
   children,
 }: {
@@ -44,20 +46,25 @@ export function resolveProductDetailComponent(
 type ProductDetailsComponentProps = {
   product: ShopperProduct;
   subscriptionOfferings?: SubscriptionOffering[];
-  plans?: SubscriptionPlan[];
+  subscriptionPlans?: SubscriptionPlan[];
 };
 
 export function ProductDetailsComponent({
   product,
   subscriptionOfferings,
-  plans,
+  subscriptionPlans,
 }: ProductDetailsComponentProps) {
   // console.log(`subscriptionOfferings in product-display: ${JSON.stringify(subscriptionOfferings, null, 2)}`);
+  console.log(`product.response.attributes.extensions in product-display: ${JSON.stringify(product.response.attributes.extensions, null, 2)}`);
   
   return (
     <div>
       {resolveProductDetailComponent(product)}
-      <ProductOffering offerings={subscriptionOfferings} plans={plans} />
+      <SmartQuestionsBot 
+        extensions={product.response.attributes.extensions as Extensions} 
+        productDescription={product.response.attributes.description}
+      />
+      <ProductOffering offerings={subscriptionOfferings || []} plans={subscriptionPlans || []} />
     </div>
   );
 }
