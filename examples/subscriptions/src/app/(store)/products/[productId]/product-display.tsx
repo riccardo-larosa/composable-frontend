@@ -54,17 +54,23 @@ export function ProductDetailsComponent({
   subscriptionOfferings,
   subscriptionPlans,
 }: ProductDetailsComponentProps) {
-  // console.log(`subscriptionOfferings in product-display: ${JSON.stringify(subscriptionOfferings, null, 2)}`);
-  console.log(`product.response.attributes.extensions in product-display: ${JSON.stringify(product.response.attributes.extensions, null, 2)}`);
-  
   return (
     <div>
       {resolveProductDetailComponent(product)}
-      <SmartQuestionsBot 
-        extensions={product.response.attributes.extensions as Extensions} 
-        productDescription={product.response.attributes.description}
-      />
-      <ProductOffering offerings={subscriptionOfferings || []} plans={subscriptionPlans || []} />
+      <div className="flex gap-4">
+        <div className="w-1/2">
+          <SmartQuestionsBot 
+            extensions={product.response.attributes.extensions as Extensions} 
+            productDescription={product.response.attributes.description}
+          />
+        </div>
+        <div className="w-1/2">
+          <ProductOffering 
+            offerings={subscriptionOfferings || []} 
+            plans={subscriptionPlans || []} 
+          />
+        </div>
+      </div>
     </div>
   );
 }

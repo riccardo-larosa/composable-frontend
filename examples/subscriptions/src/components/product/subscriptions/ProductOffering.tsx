@@ -29,7 +29,7 @@ export function ProductOffering({ offerings, plans }: ProductOfferingProps): JSX
   return (
     <div className="flex flex-col gap-6 md:gap-10">
       <div className="flex justify-end">
-        <div className="border rounded-lg p-4 w-full md:w-1/2">
+        <div className="border rounded-lg p-4 w-full ">
           <h2 className="text-xl font-semibold mb-4">Subscription Options</h2>
           
           {offerings.map((offering) => (

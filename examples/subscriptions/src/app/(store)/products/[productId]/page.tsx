@@ -35,13 +35,14 @@ export default async function ProductPage({ params }: Props) {
   // console.log(`product: ${JSON.stringify(product, null, 2)}`);
   //set the productId to the base product to search for subscriptions
   let productId = params.productId;
-  if (!product.data.attributes.base_product) {
+  // console.log(`productId: ${JSON.stringify(product, null, 2)}`);
+  if (product.data.attributes?.base_product_id) {
     productId = product.data.attributes.base_product_id;
   }
   // console.log(`productId: ${productId}`);
   const { offerings:subscriptionOfferings, plans:subscriptionPlans } = await getSubscriptionOfferingsByProductId(client, productId);
   // console.log(`subscriptionOfferings: ${JSON.stringify(subscriptionOfferings, null, 2)}`);
-  // console.log(`plans: ${JSON.stringify(plans, null, 2)}`);
+  // console.log(`plans: ${JSON.stringify(subscriptionPlans, null, 2)}`);
   // subscriptionOfferings.forEach((offering, index) => {
   //   console.log(`Offering ${index + 1}:`, {
   //     id: offering.id,
