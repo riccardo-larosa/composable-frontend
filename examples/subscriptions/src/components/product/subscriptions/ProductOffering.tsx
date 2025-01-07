@@ -3,6 +3,7 @@ import { StatusButton } from "../../button/StatusButton";
 import Price from "../Price";
 import { useCartAddSubscription } from "../../../hooks/useCartAddSubscription";
 import { SubscriptionPlan } from "@elasticpath/js-sdk";
+import { useCartAddSubscriptionItem} from "@elasticpath/react-shopper-hooks";
 
 
 interface Offering {
@@ -19,7 +20,7 @@ interface ProductOfferingProps {
 }
 
 export function ProductOffering({ offerings, plans }: ProductOfferingProps): JSX.Element | null {
-  const { mutate, isPending } = useCartAddSubscription();
+  const { mutate, isPending } = useCartAddSubscriptionItem();
 
   if (!offerings?.length) {
     return null;
@@ -58,8 +59,11 @@ export function ProductOffering({ offerings, plans }: ProductOfferingProps): JSX
                       onClick={() => {
                         console.log(`offeringId: ${offering.id}, planId: ${plan.id}`);
                         mutate({ 
-                          offeringId: offering.id, 
-                          planId: plan.id 
+                          id: offering.id, 
+                          subscription_configuration: {
+                            plan: plan.id
+                          },
+                          quantity: 1
                         });
                       }}
                       status={isPending ? "loading" : "idle"}
