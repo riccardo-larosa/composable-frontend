@@ -1,4 +1,4 @@
-# password-reset Elastic Path storefront starter
+# Elastic Path storefront starter for Subscriptions
 
 This project was generated with [Composable CLI](https://www.npmjs.com/package/composable-cli).
 
