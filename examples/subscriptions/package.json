@@ -21,7 +21,7 @@
   "dependencies": {
     "@ai-sdk/openai": "^1.0.11",
     "@elasticpath/js-sdk": "^21.0.0",
-    "@elasticpath/react-shopper-hooks": "^0.14.4",
+    "@elasticpath/react-shopper-hooks": "^0.14.5",
     "@floating-ui/react": "^0.26.3",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
